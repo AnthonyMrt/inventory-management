@@ -3,9 +3,10 @@
 import { useCreateProductMutation, useGetProductsQuery } from "@/state/api";
 import { PlusCircleIcon, SearchIcon } from "lucide-react";
 import { useState } from "react";
-import Header from "../components/Header";
-import Rating from "../components/Rating";
+import Header from "@/app/components/Header";
+import Rating from "@/app/components/Rating";
 import CreateProductModal from "./CreateProductModal";
+import Image from "next/image";
 
 type ProductFormData = {
   name: string;
@@ -14,6 +15,7 @@ type ProductFormData = {
   rating: number;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,6 +25,7 @@ const Products = () => {
   );
 
   const [createProduct] = useCreateProductMutation();
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleCreateProduct = async (productData: ProductFormData) => {
     await createProduct(productData);
   };
@@ -49,6 +52,7 @@ const Products = () => {
             className="w-full py-2 px-4 rounded bg-white"
             placeholder="Search products..."
             value={searchTerm}
+            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
@@ -59,13 +63,15 @@ const Products = () => {
         <Header name="Products" />
         <button
           className="flex items-center bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded"
+          // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
           onClick={() => setIsModalOpen(true)}
         >
           <PlusCircleIcon className="w-5 h-5 mr-2 !text-gray-200" /> Create
           Product
         </button>
       </div>
-      {/* Body PRODUCT LIST */}
+
+      {/* BODY PRODUCTS LIST */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg-grid-cols-3 gap-10 justify-between">
         {isLoading ? (
           <div>Loading...</div>
@@ -73,16 +79,24 @@ const Products = () => {
           products?.map((product) => (
             <div
               key={product.productId}
-              className="border shadow rounded-md p-4 maw-w-full w-full mx-auto"
+              className="border shadow rounded-md p-4 max-w-full w-full mx-auto"
             >
               <div className="flex flex-col items-center">
-                img
+                <Image
+                  src={`https://s3-inventory-management-1.s3.eu-west-3.amazonaws.com/product${Math.floor(
+                    Math.random() * 3
+                  ) + 1}.png`}
+                  alt={product.name}
+                  width={150}
+                  height={150}
+                  className="mb-3 rounded-2xl w-36 h-36"
+                />
                 <h3 className="text-lg text-gray-900 font-semibold">
                   {product.name}
                 </h3>
                 <p className="text-gray-800">${product.price.toFixed(2)}</p>
                 <div className="text-sm text-gray-600 mt-1">
-                  Stock : {product.stockQuantity}
+                  Stock: {product.stockQuantity}
                 </div>
                 {product.rating && (
                   <div className="flex items-center mt-2">
@@ -98,6 +112,7 @@ const Products = () => {
       {/* MODAL */}
       <CreateProductModal
         isOpen={isModalOpen}
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         onClose={() => setIsModalOpen(false)}
         onCreate={handleCreateProduct}
       />

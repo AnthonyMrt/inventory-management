@@ -4,7 +4,9 @@ import { Bell, Menu, Moon, Settings, Sun } from "lucide-react";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsDarkMode, setIsSidebarCollapsed } from "@/state";
+import Image from "next/image";
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
@@ -13,10 +15,12 @@ const Navbar = () => {
 
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const toggleSidebar = () => {
     dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const toggleDarkMode = () => {
     dispatch(setIsDarkMode(!isDarkMode));
   };
@@ -66,7 +70,13 @@ const Navbar = () => {
           </div>
           <hr className="w-0 h-7 border border-solid border-l border-gray-300 mx-3" />
           <div className="flex items-center gap-3 cursor pointer">
-            <div className="w-9 h-9">image</div>
+            <Image
+              src="https://s3-inventory-management-1.s3.eu-west-3.amazonaws.com/profile.jpg"
+              alt="Profile"
+              width={50}
+              height={50}
+              className="rounded-full h-full object-cover"
+            />
             <span className="font-semibold">Jefe</span>
           </div>
         </div>

@@ -15,6 +15,7 @@ type CreateProductModalProps = {
   onCreate: (FormData: ProductFormData) => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const CreateProductModal = ({
   isOpen,
   onClose,
@@ -28,6 +29,7 @@ const CreateProductModal = ({
     rating: 0,
   });
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -39,6 +41,7 @@ const CreateProductModal = ({
     });
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onCreate(formData);
