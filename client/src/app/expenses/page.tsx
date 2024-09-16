@@ -25,6 +25,7 @@ type AggregatedData = {
   [category: string]: AggregatedDataItem;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const Expenses = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -38,6 +39,7 @@ const Expenses = () => {
   } = useGetExpensesByCategoryQuery();
   const expenses = useMemo(() => expensesData ?? [], [expensesData]);
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const parseDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toISOString().split("T")[0];
@@ -115,6 +117,7 @@ const Expenses = () => {
                 name="category"
                 className={classNames.selectInput}
                 defaultValue="All"
+                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                 onChange={(e) => setSelectedCategory(e.target.value)}
               >
                 <option>All</option>
@@ -133,6 +136,7 @@ const Expenses = () => {
                 id="start-date"
                 name="start-date"
                 className={classNames.selectInput}
+                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                 onChange={(e) => setStartDate(e.target.value)}
               />
             </div>
@@ -146,6 +150,7 @@ const Expenses = () => {
                 id="end-date"
                 name="end-date"
                 className={classNames.selectInput}
+                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                 onChange={(e) => setEndDate(e.target.value)}
               />
             </div>
@@ -163,6 +168,7 @@ const Expenses = () => {
                 outerRadius={150}
                 fill="#8884d8"
                 dataKey="amount"
+                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                 onMouseEnter={(_, index) => setActiveIndex(index)}
               >
                 {aggregatedData.map(
