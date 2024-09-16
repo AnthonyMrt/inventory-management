@@ -2,7 +2,8 @@ import { useGetDashboardMetricsQuery } from "../../state/api";
 import { ShoppingBag } from "lucide-react";
 import Rating from "../components/Rating";
 
-const CardPopularProducts = (): any => {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const CardPopularProducts = () => {
   const { data: dashboardMetrics, isLoading } = useGetDashboardMetricsQuery();
 
   return (

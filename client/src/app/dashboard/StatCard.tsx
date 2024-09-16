@@ -15,17 +15,20 @@ type StatCardProps = {
   dateRange: string;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const StatCard = ({
   title,
   primaryIcon,
   details,
   dateRange,
-}: StatCardProps): any => {
+}: StatCardProps) => {
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const formatPercentage = (value: number) => {
     const signal = value >= 0 ? "+" : "";
     return `${signal}${value.toFixed()}%`;
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const getChangeColor = (value: number) =>
     value >= 0 ? "text-green-500" : "text-red-500";
 
