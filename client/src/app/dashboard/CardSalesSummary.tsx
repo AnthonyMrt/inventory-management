@@ -11,6 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const CardSalesSummary = () => {
   const { data, isLoading, isError } = useGetDashboardMetricsQuery();
   const salesData = data?.salesSummary || [];
@@ -22,6 +23,7 @@ const CardSalesSummary = () => {
 
   const averageChangePercentage =
     salesData.reduce((acc, curr, _, array) => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return acc + curr.changePercentage! / array.length;
     }, 0) || 0;
 
@@ -94,13 +96,13 @@ const CardSalesSummary = () => {
                 <CartesianGrid strokeDasharray="" vertical={false} />
                 <XAxis
                   dataKey="date"
-                  tickFormatter={(value): any => {
+                  tickFormatter={(value): string => {
                     const date = new Date(value);
                     return `${date.getMonth() + 1}/${date.getDate()}`;
                   }}
                 />
                 <YAxis
-                  tickFormatter={(value) => {
+                  tickFormatter={(value): string => {
                     return `$${(value / 1000000).toFixed(0)}m`;
                   }}
                   tick={{ fontSize: 12, dx: -1 }}
@@ -108,10 +110,10 @@ const CardSalesSummary = () => {
                   axisLine={false}
                 />
                 <Tooltip
-                  formatter={(value: number) => [
+                  formatter={(value: number): string[] => [
                     `$${value.toLocaleString("en")}`,
                   ]}
-                  labelFormatter={(label) => {
+                  labelFormatter={(label): string => {
                     const date = new Date(label);
                     return date.toLocaleDateString("en-US", {
                       year: "numeric",
